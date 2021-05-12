@@ -7,11 +7,6 @@ function book (title, author, pages, read){
     this.read = read;
 }
 
-book.prototype.info = function() {
-    for (let i = 0; i < myLibrary.length; i++) {
-        console.log(myLibrary[i]);
-    }
-}
 const form = document.querySelector('.form');
 const newBook = document.querySelector('#newBook')
 .addEventListener('click', () => {
@@ -27,6 +22,7 @@ const addBookButton = document.querySelector('#addBook')
 .addEventListener('click', addBookToLibrary);
 
 const booksContainer = document.querySelector('.books');
+
 function addBookToLibrary () {
     const title = document.querySelector('#title');
     const author = document.querySelector('#author');
@@ -41,28 +37,46 @@ function addBookToLibrary () {
         alert('Pages should be more than 0 or less than 9999');
         return;
     }
+    for (let i = 0; i < myLibrary.length; i++) {
+        if (title.value === myLibrary[i].title) {
+            alert('The book is already inside the shelf.');
+            return;
+        }
+    }
+
     const newBook = new book(title.value, author.value, pages.value, read.checked);
     myLibrary.push(newBook);
-    /** 
+    
+    resetLibrary();
+    displayLibrary();
+}
+
+function resetLibrary() {
+    booksContainer.innerHTML = '';
+}
+
+function displayLibrary() {
     //Create added book and show details
+    for(let i = 0; i < myLibrary.length; i++) {
     const addedBook = document.createElement('div')
     addedBook.className = 'addedBook';
+    addedBook.dataset.index = i;
     booksContainer.appendChild(addedBook);
 
     const addedTitle = document.createElement('h1')
-    addedTitle.textContent = title.value;
+    addedTitle.textContent = myLibrary[i].title;
 
     const addedAuthor = document.createElement('h2')
-    addedAuthor.textContent = author.value;
+    addedAuthor.textContent = myLibrary[i].author;
 
     const addedPages = document.createElement('h3')
-    addedPages.textContent = `${parseInt(pages.value)} pages`;
+    addedPages.textContent = `${parseInt(myLibrary[i].pages)} pages`;
 
     const readContainer = document.createElement('div');
     readContainer.className = 'readContainer';
 
     const addedRead = document.createElement('p')
-    if (read.checked === false) addedRead.textContent = 'Have not finished reading.';
+    if (myLibrary[i].read === false) addedRead.textContent = 'Have not finished reading.';
     else addedRead.textContent = 'Finished reading.';
 
     const readButton = document.createElement('input');
@@ -70,8 +84,8 @@ function addBookToLibrary () {
 
     const remove = document.createElement('button');
     remove.textContent = 'x';
-    
-    //Select all details and append them to books section
+
+    //Append all added details to books section
     addedBook.appendChild(addedTitle);
     addedBook.appendChild(addedAuthor);
     addedBook.appendChild(addedPages);
@@ -80,79 +94,18 @@ function addBookToLibrary () {
     readContainer.appendChild(readButton);
     addedBook.appendChild(remove);
 
-    //readButton Value Changer (Finished reading or Have not finished reading
-    if (read.checked === true) readButton.checked = true;
+    //readButton Value Changer (Finished reading or Have not finished reading)
+    if (myLibrary[i].read === true) readButton.checked = true;
     readButton.addEventListener('click', () => {
         if (readButton.checked === true) addedRead.textContent = 'Finished Reading';
         else addedRead.textContent = 'Have Not Finished Reading';
     });
 
-    //Remove Function
+    //Remove Book Function
     remove.addEventListener('click', () => {
+        if (parseInt(addedBook.dataset.index) === myLibrary.length) myLibrary.pop();
+        else myLibrary.splice(addedBook.dataset.index, 1);
         addedBook.remove();
     });
-    */
-    displayLibrary();
-    console.table(myLibrary)
-}
-
-
-
-function displayLibrary() {
-    for (let i = 0; i < myLibrary.length; i++) {
-        console.log(`Value of i: ${i}`);
-        //Create added book and show details
-        const addedBook = document.createElement('div')
-        addedBook.className = 'addedBook';
-        addedBook.dataset.index = i;
-        booksContainer.appendChild(addedBook);
-        console.log(addedBook);
-
-        const addedTitle = document.createElement('h1')
-        addedTitle.textContent = myLibrary[i].title;
-
-        const addedAuthor = document.createElement('h2')
-        addedAuthor.textContent = myLibrary[i].author;
-
-        const addedPages = document.createElement('h3')
-        addedPages.textContent = `${parseInt(myLibrary[i].pages)} pages`;
-
-        const readContainer = document.createElement('div');
-        readContainer.className = 'readContainer';
-
-        const addedRead = document.createElement('p')
-        if (myLibrary[i].read === false) addedRead.textContent = 'Have not finished reading.';
-        else addedRead.textContent = 'Finished reading.';
-
-        const readButton = document.createElement('input');
-        readButton.type = 'checkbox';
-
-        const remove = document.createElement('button');
-        remove.textContent = 'x';
-
-        //Select all details and append them to books section
-        addedBook.appendChild(addedTitle);
-        addedBook.appendChild(addedAuthor);
-        addedBook.appendChild(addedPages);
-        addedBook.appendChild(readContainer);
-        readContainer.appendChild(addedRead);
-        readContainer.appendChild(readButton);
-        addedBook.appendChild(remove);
-
-        //readButton Value Changer (Finished reading or Have not finished reading
-        if (myLibrary[i].read === true) readButton.checked = true;
-        readButton.addEventListener('click', () => {
-            if (readButton.checked === true) addedRead.textContent = 'Finished Reading';
-            else addedRead.textContent = 'Have Not Finished Reading';
-        });
-
-        //Remove Function
-        remove.addEventListener('click', () => {
-            if (parseInt(addedBook.dataset.index) === myLibrary.length) myLibrary.pop();
-            else myLibrary.splice(addedBook.dataset.index, 1);
-            addedBook.remove();
-            console.log(`Value of i: ${i}`);
-            console.table(myLibrary)
-        });
     }
 }
