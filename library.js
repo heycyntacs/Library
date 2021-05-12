@@ -46,7 +46,8 @@ function addBookToLibrary () {
 
     const newBook = new book(title.value, author.value, pages.value, read.checked);
     myLibrary.push(newBook);
-    
+    setStorage();
+
     resetLibrary();
     displayLibrary();
 }
@@ -106,6 +107,19 @@ function displayLibrary() {
         if (parseInt(addedBook.dataset.index) === myLibrary.length) myLibrary.pop();
         else myLibrary.splice(addedBook.dataset.index, 1);
         addedBook.remove();
+        setStorage();
     });
     }
 }
+
+function setStorage () {
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+}
+
+function retrieveStorage () {
+    myLibrary = JSON.parse(localStorage.getItem('myLibrary'));
+    if (myLibrary === null) myLibrary = [];
+    displayLibrary();
+}
+
+retrieveStorage();
