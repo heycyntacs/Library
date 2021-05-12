@@ -1,0 +1,131 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+#header{
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 4rem;
+    padding: 50px;
+}
+
+.newBookContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+#newBook {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.form {
+    display: none;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    padding: 30px;
+    width: 500px;
+    margin: auto;
+    background-color: aquamarine;
+    border-radius: 30px;
+    border: 2px solid;
+}
+
+#removeForm {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    border-radius: 50%;
+    background-color: lightcoral;
+    height: 30px;
+    width: 30px;
+    font-size: 1rem;
+}
+
+.form input{
+    height: 30px;
+    width: 300px;
+    margin: 10px;
+    font-size: 1rem;
+    padding:5px;
+}
+
+.readBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+#read {
+    width: 20px;
+}
+
+#addBook {
+    font-size: 1rem;
+    height: 30px;
+    width: 150px;
+    margin: 10px;
+}
+
+.books {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 60px;
+}
+
+.addedBook {
+    position: relative;
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    border: 2px solid;
+    font-family: 'Roboto', sans-serif;
+}
+
+.addedBook h1,
+.addedBook h2,
+.addedBook h3{
+    margin: 5px;
+}
+
+.addedBook button {
+    position: absolute;
+    right: 5%;
+    border-radius: 50%;
+    background-color: lightcoral;
+    height: 30px;
+    width: 30px;
+    font-size: 1rem;
+}
+
+.readContainer {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+.readContainer p{
+    margin-right: 10px;
+}
+
+.readContainer input {
+    height: 20px;
+    width: 20px;
+}
+
+
