@@ -98,8 +98,15 @@ function displayLibrary() {
     //readButton Value Changer (Finished reading or Have not finished reading)
     if (myLibrary[i].read === true) readButton.checked = true;
     readButton.addEventListener('click', () => {
-        if (readButton.checked === true) addedRead.textContent = 'Finished Reading';
-        else addedRead.textContent = 'Have Not Finished Reading';
+        if (readButton.checked === true) {
+            addedRead.textContent = 'Finished Reading';
+            myLibrary[i].read = true;
+        }
+        else {
+            addedRead.textContent = 'Have Not Finished Reading';
+            myLibrary[i].read = false;
+        }
+        setStorage();
     });
 
     //Remove Book Function
