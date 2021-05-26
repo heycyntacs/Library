@@ -1,10 +1,12 @@
 let myLibrary = [];
 
-function book (title, author, pages, read){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+class Book {
+    constructor (title, author, pages, read){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
 }
 
 const form = document.querySelector('.form');
@@ -44,7 +46,7 @@ function addBookToLibrary () {
         }
     }
 
-    const newBook = new book(title.value, author.value, pages.value, read.checked);
+    const newBook = new Book(title.value, author.value, pages.value, read.checked);
     myLibrary.push(newBook);
     setStorage();
 
